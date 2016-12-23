@@ -15,6 +15,7 @@ BuildRequires:	libxslt-progs
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	libselinux >= 2.1.9
+Requires:	uname(release) >= 3.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
