@@ -2,7 +2,7 @@ Summary:	bubblewrap - container setup utility
 Summary(pl.UTF-8):	bubblewrap - narzędzie do tworzenia kontenerów
 Name:		bubblewrap
 Version:	0.1.5
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Applications/System
 #Source0Download: https://github.com/projectatomic/bubblewrap/releases
