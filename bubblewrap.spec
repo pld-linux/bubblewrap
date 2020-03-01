@@ -1,13 +1,13 @@
 Summary:	bubblewrap - container setup utility
 Summary(pl.UTF-8):	bubblewrap - narzędzie do tworzenia kontenerów
 Name:		bubblewrap
-Version:	0.3.3
+Version:	0.4.0
 Release:	1
 License:	LGPL v2+
 Group:		Applications/System
 #Source0Download: https://github.com/projectatomic/bubblewrap/releases
 Source0:	https://github.com/projectatomic/bubblewrap/releases/download/v%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	69ce48ca2d637eaf6b42674ee903e5ad
+# Source0-md5:	a0f3f2c80a3bad535af5bbd1b502450c
 URL:		https://github.com/projectatomic/bubblewrap
 BuildRequires:	libcap-devel
 BuildRequires:	libselinux-devel >= 2.1.9
