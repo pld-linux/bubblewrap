@@ -1,20 +1,23 @@
 Summary:	bubblewrap - container setup utility
 Summary(pl.UTF-8):	bubblewrap - narzędzie do tworzenia kontenerów
 Name:		bubblewrap
-Version:	0.4.1
+Version:	0.5.0
 Release:	1
 License:	LGPL v2+
 Group:		Applications/System
-#Source0Download: https://github.com/projectatomic/bubblewrap/releases
-Source0:	https://github.com/projectatomic/bubblewrap/releases/download/v%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	1104b0e43006f22076b5057c129939c8
-URL:		https://github.com/projectatomic/bubblewrap
+#Source0Download: https://github.com/containers/bubblewrap/releases
+Source0:	https://github.com/containers/bubblewrap/releases/download/v%{version}/%{name}-%{version}.tar.xz
+# Source0-md5:	a1b802c8381527bf6acbeed7e5ceac3a
+URL:		https://github.com/containers/bubblewrap
 BuildRequires:	libcap-devel
-BuildRequires:	libselinux-devel >= 2.1.9
+BuildRequires:	libselinux-devel >= 2.3
 BuildRequires:	libxslt-progs
+BuildRequires:	pkgconfig
+BuildRequires:	rpm-build >= 4.6
+BuildRequires:	rpmbuild(macros) >= 1.719
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	libselinux >= 2.1.9
+Requires:	libselinux >= 2.3
 Requires:	uname(release) >= 3.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,6 +45,7 @@ Summary(pl.UTF-8):	Bashowe dopełnianie parametrów polecenia bwrap
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
 Requires:	bash-completion >= 2.0
+BuildArch:	noarch
 
 %description -n bash-completion-bubblewrap
 Bash completion for bwrap command.
@@ -49,12 +53,28 @@ Bash completion for bwrap command.
 %description -n bash-completion-bubblewrap -l pl.UTF-8
 Bashowe dopełnianie parametrów polecenia bwrap.
 
+%package -n zsh-completion-bubblewrap
+Summary:	ZSH completion for bwrap command
+Summary(pl.UTF-8):	Dopełnianie parametrów polecenia bwrap dla ZSH
+Group:		Applications/Shells
+Requires:	%{name} = %{version}-%{release}
+Requires:	zsh-completions
+BuildArch:	noarch
+
+%description -n zsh-completion-bubblewrap
+ZSH completion for bwrap command.
+
+%description -n zsh-completion-bubblewrap -l pl.UTF-8
+Dopełnianie parametrów polecenia bwrap dla ZSH.
+
 %prep
 %setup -q
 
 %build
 %configure \
-	--disable-silent-rules
+	--disable-silent-rules \
+	--with-bash-completion-dir=%{bash_compdir}
+
 %{__make}
 
 %install
@@ -74,3 +94,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n bash-completion-bubblewrap
 %defattr(644,root,root,755)
 %{bash_compdir}/bwrap
+
+%files -n zsh-completion-bubblewrap
+%defattr(644,root,root,755)
+%{zsh_compdir}/_bwrap
