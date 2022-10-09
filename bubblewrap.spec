@@ -1,13 +1,13 @@
 Summary:	bubblewrap - container setup utility
 Summary(pl.UTF-8):	bubblewrap - narzędzie do tworzenia kontenerów
 Name:		bubblewrap
-Version:	0.6.1
+Version:	0.6.2
 Release:	1
 License:	LGPL v2+
 Group:		Applications/System
 #Source0Download: https://github.com/containers/bubblewrap/releases
 Source0:	https://github.com/containers/bubblewrap/releases/download/v%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	a481e7981e9c00e6b3eeaa05e9c2dc07
+# Source0-md5:	24decf98e063e0741d6a64271ac788b2
 URL:		https://github.com/containers/bubblewrap
 BuildRequires:	libcap-devel
 BuildRequires:	libselinux-devel >= 2.3
@@ -44,7 +44,7 @@ Summary:	Bash completion for bwrap command
 Summary(pl.UTF-8):	Bashowe dopełnianie parametrów polecenia bwrap
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
-Requires:	bash-completion >= 2.0
+Requires:	bash-completion >= 1:2.0
 BuildArch:	noarch
 
 %description -n bash-completion-bubblewrap
