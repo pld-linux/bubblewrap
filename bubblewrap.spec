@@ -1,20 +1,23 @@
 Summary:	bubblewrap - container setup utility
 Summary(pl.UTF-8):	bubblewrap - narzędzie do tworzenia kontenerów
 Name:		bubblewrap
-Version:	0.8.0
+Version:	0.9.0
 Release:	1
 License:	LGPL v2+
 Group:		Applications/System
 #Source0Download: https://github.com/containers/bubblewrap/releases
 Source0:	https://github.com/containers/bubblewrap/releases/download/v%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	fc0e14bc26df76225e8f8cc2df9fb657
+# Source0-md5:	adcbd7c08ac068a9328ec93cd83716e5
 URL:		https://github.com/containers/bubblewrap
+BuildRequires:	docbook-style-xsl-nons
 BuildRequires:	libcap-devel
 BuildRequires:	libselinux-devel >= 2.3
 BuildRequires:	libxslt-progs
+BuildRequires:	meson >= 0.49.0
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.719
+BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	libselinux >= 2.3
@@ -71,17 +74,16 @@ Dopełnianie parametrów polecenia bwrap dla ZSH.
 %setup -q
 
 %build
-%configure \
-	--disable-silent-rules \
-	--with-bash-completion-dir=%{bash_compdir}
+%meson build \
+	-Dbash_completion_dir=%{bash_compdir} \
+	-Dzsh_completion_dir=%{zsh_compdir}
 
-%{__make}
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+%ninja_install -C build
 
 %clean
 rm -rf $RPM_BUILD_ROOT
