@@ -1,13 +1,13 @@
 Summary:	bubblewrap - container setup utility
 Summary(pl.UTF-8):	bubblewrap - narzędzie do tworzenia kontenerów
 Name:		bubblewrap
-Version:	0.10.0
+Version:	0.11.0
 Release:	1
 License:	LGPL v2+
 Group:		Applications/System
 #Source0Download: https://github.com/containers/bubblewrap/releases
 Source0:	https://github.com/containers/bubblewrap/releases/download/v%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	85f144f6c2c28c112abbcf98bedf6137
+# Source0-md5:	630eec714ea04729efd116ea85a715a3
 URL:		https://github.com/containers/bubblewrap
 BuildRequires:	docbook-style-xsl-nons
 BuildRequires:	libcap-devel
@@ -90,7 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.md
+%doc NEWS.md README.md SECURITY.md
 %attr(755,root,root) %{_bindir}/bwrap
 %{_mandir}/man1/bwrap.1*
 
