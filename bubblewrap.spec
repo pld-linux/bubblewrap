@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	tests		# test suite
+#
 Summary:	bubblewrap - container setup utility
 Summary(pl.UTF-8):	bubblewrap - narzędzie do tworzenia kontenerów
 Name:		bubblewrap
@@ -16,6 +20,9 @@ BuildRequires:	libxslt-progs
 BuildRequires:	meson >= 0.49.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
+%if %{with tests}
+BuildRequires:	python3-seccomp
+%endif
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	tar >= 1:1.22
@@ -78,9 +85,14 @@ Dopełnianie parametrów polecenia bwrap dla ZSH.
 	-Dbash_completion_dir=%{bash_compdir} \
 	-Dman=enabled \
 	-Dselinux=enabled \
+	-Dtests=%{__true_false tests} \
 	-Dzsh_completion_dir=%{zsh_compdir}
 
 %meson_build
+
+%if %{with tests}
+%meson_test
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
